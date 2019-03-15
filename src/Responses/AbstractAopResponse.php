@@ -2,7 +2,6 @@
 namespace Omnipay\Alipay\Responses;
 abstract class AbstractAopResponse extends AbstractResponse
 {
-    protected $key;
     /**
      * Is the response successful?
      *
@@ -16,12 +15,12 @@ abstract class AbstractAopResponse extends AbstractResponse
     {
         return $this->getAlipayResponse('code');
     }
-    public function getAlipayResponse($key = null)
+    public function getAlipayResponse($key = null, $response_key = null)
     {
         if ($key) {
-            return array_get($this->data, "{$this->key}.{$key}");
+            return array_get($this->data, "{$response_key}.{$key}");
         } else {
-            return array_get($this->data, $this->key);
+            return array_get($this->data, $response_key);
         }
     }
     public function getMessage()
