@@ -36,6 +36,7 @@ abstract class AbstractAopRequest extends AbstractRequest
             'sign_type',
             'timestamp',
             'version',
+            'method',
             'biz_content'
         );
     }
@@ -237,6 +238,22 @@ abstract class AbstractAopRequest extends AbstractRequest
     public function setAppId($value)
     {
         return $this->setParameter('app_id', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getMethod()
+    {
+        return $this->getParameter('method');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setMethod($value)
+    {
+        return $this->setParameter('method', $value);
     }
     /**
      * @return mixed
