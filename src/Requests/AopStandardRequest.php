@@ -6,7 +6,7 @@ use Omnipay\Alipay\Responses\AopStandardResponse;
  * @package Omnipay\Alipay\Requests
  * @link    https://docs.open.alipay.com/api_1/alipay.trade.create
  */
-class AopTradeCreateRequest extends AbstractAopRequest
+class AopStandardRequest extends AbstractAopRequest
 {
     /**
      * @return mixed
@@ -39,23 +39,6 @@ class AopTradeCreateRequest extends AbstractAopRequest
     public function setAppAuthToken($value)
     {
         return $this->setParameter('app_auth_token', $value);
-    }
-    /**
-     * @return mixed
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setMethod($value)
-    {
-        $this->method = $value;
-        return $this;
     }
     /**
      * @param mixed $data

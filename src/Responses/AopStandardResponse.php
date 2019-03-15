@@ -8,12 +8,4 @@ class AopStandardResponse extends AbstractAopResponse
      * @var AbstractAopRequest
      */
     protected $request;
-    public function getTradeNo()
-    {
-        return $this->getAlipayResponse('trade_no');
-    }
-    public function getOutTradeNo()
-    {
-        return $this->getAlipayResponse('out_trade_no');
-    }
 }

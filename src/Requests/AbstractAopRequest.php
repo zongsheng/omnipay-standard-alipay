@@ -5,7 +5,6 @@ use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\AbstractRequest;
 abstract class AbstractAopRequest extends AbstractRequest
 {
-    protected $method;
     protected $privateKey;
     protected $encryptKey;
     protected $alipayPublicKey;
@@ -24,7 +23,6 @@ abstract class AbstractAopRequest extends AbstractRequest
         $this->setDefaults();
         $this->convertToString();
         $data = $this->parameters->all();
-        $data['method'] = $this->method;
         ksort($data);
         $data['sign'] = $this->sign($data, $this->getSignType());
         return $data;
@@ -103,23 +101,6 @@ abstract class AbstractAopRequest extends AbstractRequest
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setMethod($value)
-    {
-        $this->method = $value;
-        return $this;
-    }
     /**
      * @return mixed
      */

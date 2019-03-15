@@ -117,6 +117,22 @@ abstract class AbstractAopGateway extends AbstractGateway
     /**
      * @return mixed
      */
+    public function getMethod()
+    {
+        return $this->getParameter('method');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setMethod($value)
+    {
+        return $this->setParameter('method', $value);
+    }
+    /**
+     * @return mixed
+     */
     public function getEncryptKey()
     {
         return $this->getParameter('encrypt_key');
