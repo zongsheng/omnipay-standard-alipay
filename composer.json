@@ -6,7 +6,7 @@
     "alipay",
     "gateway",
     "merchant",
-    "omnipay",
+    "omnipay"
   ],
   "homepage": "https://github.com/zongsheng/omnipay-standard-alipay",
   "license": "MIT",
