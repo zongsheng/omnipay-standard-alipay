@@ -1,0 +1,7 @@
+.DS_Store
+/vendor
+/public
+/.idea
+/.tmp
+composer.lock
+composer.phar
