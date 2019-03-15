@@ -1,0 +1,35 @@
+{
+  "name": "zongsheng/omnipay-standard-alipay",
+  "type": "library",
+  "description": "Alipay gateway for Omnipay payment processing library",
+  "keywords": [
+    "alipay",
+    "gateway",
+    "merchant",
+    "omnipay",
+  ],
+  "homepage": "https://github.com/zongsheng/omnipay-standard-alipay",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sheng",
+      "email": "xuzongsheng@foxmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Alipay\\": "src/"
+    },
+    "files": [
+      "src/Common/helpers.php"
+    ]
+  },
+  "require": {
+    "omnipay/common": "^3.0",
+    "php-http/guzzle6-adapter": "*"
+  },
+  "require-dev": {
+    "omnipay/tests": "^3.0",
+    "squizlabs/php_codesniffer": "3.*"
+  }
+}
