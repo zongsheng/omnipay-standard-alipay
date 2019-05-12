@@ -197,6 +197,54 @@ abstract class AbstractAopGateway extends AbstractGateway
     /**
      * @return mixed
      */
+    public function getGrantType()
+    {
+        return $this->getParameter('grant_type');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setGrantType($value)
+    {
+        return $this->setParameter('grant_type', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->getParameter('code');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setCode($value)
+    {
+        return $this->setParameter('code', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getAuthToken()
+    {
+        return $this->getParameter('auth_token');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setAuthToken($value)
+    {
+        return $this->setParameter('auth_token', $value);
+    }
+    /**
+     * @return mixed
+     */
     public function getSysServiceProviderId()
     {
         return $this->getParameter('sys_service_provider_id');
@@ -280,5 +328,37 @@ abstract class AbstractAopGateway extends AbstractGateway
     public function sandbox()
     {
         return $this->setEnvironment('sandbox');
+    }
+    /**
+     * @return mixed
+     */
+    public function getImageType()
+    {
+        return $this->getParameter('image_type');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setImageType($value)
+    {
+        return $this->setParameter('image_type', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getImageContent()
+    {
+        return $this->getParameter('image_content');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setImageContent($value)
+    {
+        return $this->setParameter('image_content', $value);
     }
 }

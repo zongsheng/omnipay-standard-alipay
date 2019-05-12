@@ -1,5 +1,6 @@
 <?php
 namespace Omnipay\Alipay\Requests;
+use GuzzleHttp\Client;
 use Omnipay\Alipay\Common\Signer;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\AbstractRequest;
@@ -73,7 +74,7 @@ abstract class AbstractAopRequest extends AbstractRequest
     protected function sign($params, $signType)
     {
         $signer = new Signer($params);
-        $signer->setIgnores(['sign']);
+        $signer->setIgnores(['sign','image_content']);
         $signType = strtoupper($signType);
         if ($signType == 'RSA') {
             $sign = $signer->signWithRSA($this->getPrivateKey());
@@ -138,10 +139,26 @@ abstract class AbstractAopRequest extends AbstractRequest
         $method = $this->getRequestMethod();
         $url    = $this->getRequestUrl($data);
         $body   = $this->getRequestBody();
-        $headers = [
-            'Content-Type' => 'application/x-www-form-urlencoded'
-        ];
-        $response = $this->httpClient->request($method, $url, $headers, $body);
+        if ($this->getImageType()) {
+            $client = new Client(['timeout' => 60]);
+            $response = $client->request($method, $url, [
+                'multipart' => [
+                    [
+                        'name'     => 'image_type',
+                        'contents' => $this->getImageType()
+                    ],
+                    [
+                        'name'     => 'image_content',
+                        'contents' => $this->getImageContent()
+                    ]
+                ]
+            ]);
+        } else {
+            $headers = [
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ];
+            $response = $this->httpClient->request($method, $url, $headers, $body);
+        }
         $payload = $this->decode($response->getBody());
         return $payload;
     }
@@ -193,12 +210,93 @@ abstract class AbstractAopRequest extends AbstractRequest
         $body = http_build_query($params);
         return $body;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGrantType()
+    {
+        return $this->getParameter('grant_type');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setGrantType($value)
+    {
+        return $this->setParameter('grant_type', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->getParameter('code');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setCode($value)
+    {
+        return $this->setParameter('code', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getAuthToken()
+    {
+        return $this->getParameter('auth_token');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setAuthToken($value)
+    {
+        return $this->setParameter('auth_token', $value);
+    }
     /**
      * @return mixed
      */
     public function getBizContent()
     {
         return $this->getParameter('biz_content');
+    }
+    /**
+     * @return mixed
+     */
+    public function getImageType()
+    {
+        return $this->getParameter('image_type');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setImageType($value)
+    {
+        return $this->setParameter('image_type', $value);
+    }
+    /**
+     * @return mixed
+     */
+    public function getImageContent()
+    {
+        return $this->getParameter('image_content');
+    }
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setImageContent($value)
+    {
+        return $this->setParameter('image_content', $value);
     }
     protected function decode($data)
     {
